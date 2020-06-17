@@ -1,9 +1,5 @@
 import { AnyAction } from "redux";
-
-
-export interface MineState {
-
-}
+import {MineState} from '../../typings/state'
 
 const initialState: MineState = {
 

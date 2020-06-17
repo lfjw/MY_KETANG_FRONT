@@ -27,6 +27,18 @@ cnpm i redux react-redux @types/react-redux redux-thunk  redux-logger @types/red
 ```sh
 cnpm i sass-loader node-sass -D
 ```
+```sh
+cnpm i px2rem-loader lib flexible -D
+```
+```sh
+# 样式
+cnpm i classnames -D
+@types/classnames
+```
+```sh 
+#轮播图
+cnpm i React-Motion -S
+```
 ## 3. UI组件
 
 使用组件库
