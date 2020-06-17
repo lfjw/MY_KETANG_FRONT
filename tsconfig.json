@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5", // 编译的目标是es5
+    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -8,7 +8,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true, // 允许在common.js模块和esmodule进行转换
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -17,15 +17,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react", // 如何编译jsx语法
-    "baseUrl": ".", // 查找飞相对路径的模块的起始位置
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
+    "jsx": "react",
+    "baseUrl": "."
   },
   "include": [
-    "src" // 只编译src目录下的ts文件
+    "src"
   ]
 }

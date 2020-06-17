@@ -10,7 +10,7 @@ import Home from './view/Home'
 import Mine from './view/Mine'
 import Profile from './view/Profile'
 import { ConnectedRouter } from 'connected-react-router'
-import history from '@/history'
+import history from './history'
 
 
 ReactDOM.render(
