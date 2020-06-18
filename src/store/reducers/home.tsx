@@ -1,25 +1,25 @@
 import { AnyAction } from "redux";
-import { HomeState } from '../../typings/state'
-import * as types from '../action-types';
-
+import { HomeState } from "../../typings/state";
+import * as types from "../action-types";
 
 const initialState: HomeState = {
-    currentCategory: 'all', //当前分类
-}
+  currentCategory: "all", //当前分类
+};
 
-export default function (state: HomeState = initialState, action: AnyAction): HomeState {
+export default function (
+  state: HomeState = initialState,
+  action: AnyAction
+): HomeState {
+  switch (action.type) {
+    case types.SET_CURRENT_CATEGORY:
+      return {
+        ...state,
+        currentCategory: action.payload,
+      };
 
-    switch (action.type) {
-        case types.SET_CURRENT_CATEGORY:
-            return {
-                ...state,
-                currentCategory: action.payload
-            }
-            break;
+    default:
+      break;
+  }
 
-        default:
-            break;
-    }
-
-    return state
+  return state;
 }

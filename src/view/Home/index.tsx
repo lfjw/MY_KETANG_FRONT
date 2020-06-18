@@ -25,5 +25,8 @@ function Home(props: Props) {
     </>
   )
 }
+
 const mapStateToProps = (state: CombinedState): HomeState => state.home
+
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
+// connect(state=> state, action)
