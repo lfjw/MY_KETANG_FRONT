@@ -13,6 +13,17 @@ import { Transition } from "react-transition-group";
  *
  *
  * import logo from 'logo.png' ts会有问题
+ * 
+ * ts不认识图片 只认识js jsx tsx 不能加载
+ * 想要import 需要加文件
+ * images.d.ts 
+ * declare module '*.svg'
+ * declare module '*.png'
+ * declare module '*.jpg'
+ * declare module '*.jpeg'
+ * declare module '*.gif'
+ * declare module '*.bmp'
+ * declare module '*.tiff'
  */
 
 /**
@@ -29,7 +40,14 @@ const defaultStyle: CSSProperties = {
   opacity: 0,
 }
 
-const transitionStyles = {
+interface TransitionStyles {
+  entering: CSSProperties;
+  entered: CSSProperties;
+  exiting: CSSProperties;
+  exited: CSSProperties;
+  unmounted: CSSProperties;
+}
+const transitionStyles: TransitionStyles = {
   entering: { opacity: 1 },
   entered: { opacity: 1 },
   exiting: { opacity: 0 },
@@ -55,9 +73,9 @@ function HomeHeader(props: Props) {
     console.log('订阅');
     return () => {
       console.log('取消订阅');
-      
+
     }
-    
+
   })
   return (
     <header className="home-header">
@@ -69,7 +87,8 @@ function HomeHeader(props: Props) {
         />
       </div>
       <Transition in={isMenuVisible} timeout={duration}>
-        {(state) => (
+        {/* 类型声明 */}
+        {(state: keyof TransitionStyles) => (
           <ul
             className="category"
             onClick={setCurrentCategory}
