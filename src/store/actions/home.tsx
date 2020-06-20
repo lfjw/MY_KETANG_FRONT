@@ -7,5 +7,6 @@ export default {
       type: types.SET_CURRENT_CATEGORY,
       payload: currentCategory
     }
-  }
+  },
+  
 }
