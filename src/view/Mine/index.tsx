@@ -24,14 +24,16 @@ function Mine(props: Props) {
   } else if (loginState === LOGIN_TYPES.LOGINED) {
     console.log(user, '----');
     // 登录
+
+    // TODO user?.username 写法
     content = (
       <div className='user-info'>
         <Descriptions title='当前用户'>
           <Descriptions.Item label='用户名'>
-            jw
+            {user?.username}
           </Descriptions.Item>
           <Descriptions.Item label='邮箱'>
-            jw
+            {user?.email}
           </Descriptions.Item>
         </Descriptions>
         // TODO 退出函数有问题

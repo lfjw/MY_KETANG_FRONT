@@ -9,6 +9,10 @@ import './assets/style/common.scss'
 import Home from './view/Home'
 import Mine from './view/Mine'
 import Profile from './view/Profile'
+import Login from './view/Login'
+import Register from './view/Register'
+
+
 import { ConnectedRouter } from 'connected-react-router'
 import history from './history'
 import Tab from './components/Tab'
@@ -22,6 +26,8 @@ ReactDOM.render(
             <Route path='/' exact component={Home}></Route>
             <Route path='/Mine' exact component={Mine}></Route>
             <Route path='/Profile' exact component={Profile}></Route>
+            <Route path='/Login' exact component={Login}></Route>
+            <Route path='/Register' exact component={Register}></Route>
           </Switch>
         </main>
         <Tab></Tab>

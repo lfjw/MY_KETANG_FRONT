@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { message } from "antd";
 axios.defaults.baseURL = 'http://localhost:8888'
 
-axios.defaults.headers.post['COntent-Type'] = 'application/json;charset=UTF-8'
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 axios.interceptors.request.use((config: AxiosRequestConfig) => {
   let access_token = sessionStorage.getItem('access_token')

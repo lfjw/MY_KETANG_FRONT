@@ -18,5 +18,6 @@ export default {
   //     sessionStorage.removeItem('access_token');
   //     dispatch(push('/login'))
   //   }
-  // }
+  // },
+
 }
