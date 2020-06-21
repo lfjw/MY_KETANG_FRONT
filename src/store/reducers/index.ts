@@ -7,7 +7,7 @@ import home from "./home";
 import mine from "./mine";
 import profile from "./profile";
 import history from "../../history";
-import { CombinedState } from '../../typings/state'
+import { CombinedState } from '../../typings'
 
 let reducers: ReducersMapObject<CombinedState, LocationChangeAction> = {
   home,

@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { ProfileState } from '../../typings/state'
+import { ProfileState } from '../../typings'
 
 const initialState: ProfileState = {
 

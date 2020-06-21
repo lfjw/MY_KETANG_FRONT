@@ -2,7 +2,7 @@ import React from 'react'
 import './index.scss'
 import { Input, Form, Button } from 'antd'
 import { connect } from "react-redux";
-import { CombinedState, MineState } from "../../typings/state";
+import { CombinedState, MineState } from "../../typings";
 import mapDispatchToProps from 'src/store/actions/login'
 
 

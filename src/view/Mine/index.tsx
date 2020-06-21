@@ -1,12 +1,32 @@
-import React, { PropsWithChildren, useEffect } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 import './index.scss'
 import { RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { CombinedState, MineState, LOGIN_TYPES } from '../../typings/state'
+import { CombinedState, MineState, LOGIN_TYPES } from '../../typings'
 import mapDispatchToProps from '../../store/actions/mime'
 import Nav from '../../components/Nav'
 import history from '../../history';
 import { Descriptions, Button, Alert } from 'antd'
+
+import { Upload, message } from 'antd';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { RcFile, UploadChangeParam } from 'antd/lib/upload'
+
+
+
+function beforeUpload(file: RcFile) {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) {
+    message.error('You can only upload JPG/PNG file!');
+  }
+  // B  KB  M
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error('Image must smaller than 2MB!');
+  }
+  return isJpgOrPng && isLt2M;
+}
+
 
 type Props = PropsWithChildren<RouteComponentProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps>
 function Mine(props: Props) {
@@ -16,18 +36,62 @@ function Mine(props: Props) {
     validate()
   }, [validate])
 
+  const [loading, changeLoading] = useState(false)
+
+
+  function handleChange(info: UploadChangeParam) {
+    if (info.file.status === 'uploading') {
+      changeLoading(true)
+      return;
+    }
+    if (info.file.status === 'done') {
+      // response就是上传接口返回的响应体
+      const {success, data} = info.file.response
+      if(success){
+        props.setAvatar(data)
+      }else{
+        message.error('上传失败')
+      }
+      // Get this url from response in real world.
+      // getBase64(info.file.originFileObj, (imageUrl: any) => {
+      //   changeLoading(false)
+      //   setImageUrl(imageUrl)
+      // });
+    }
+  }
+
   let content;
 
   if (loginState === LOGIN_TYPES.UN_VALIDATE) {
     // 未验证
     content = null
   } else if (loginState === LOGIN_TYPES.LOGINED) {
-    console.log(user, '----');
     // 登录
+    const uploadButton = (
+      <div>
+        {loading ? <LoadingOutlined /> : <PlusOutlined />}
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
 
     // TODO user?.username 写法
     content = (
       <div className='user-info'>
+        {/* name 往服务器上传头像的时候，应该使用那个字段名上传 */}
+        <Upload
+          name="avatar"
+          listType="picture-card"
+          className="avatar-uploader"
+          showUploadList={false}
+          action="http://localhost:8888/user/uploadAvatar"
+          beforeUpload={beforeUpload}
+          onChange={handleChange}
+          // 上传到服务端id名称
+          data={{ userId: user?.id}}
+        >
+          {user.avatar ? <img src={user.avatar} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+        </Upload>
+
         <Descriptions title='当前用户'>
           <Descriptions.Item label='用户名'>
             {user?.username}

@@ -13,7 +13,7 @@ axios.interceptors.request.use((config: AxiosRequestConfig) => {
 }, (error: any) => {
   return Promise.reject(error)
 })
-
+// 拦截器，把AxiosResponse 变成了 AxiosResponse.data
 axios.interceptors.response.use(response => {
   return response.data
 }, error => {

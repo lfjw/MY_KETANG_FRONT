@@ -1,12 +1,10 @@
 import {
   RouterState,
 } from "connected-react-router";
-
-export interface HomeState {
-  currentCategory: string;
-}
+import { HomeState} from './'
 
 export interface User {
+  id?: string; //用户id
   username: string;
   email: string;
   avatar: string;
@@ -18,8 +16,8 @@ export enum LOGIN_TYPES {
   UN_LOGINED = 'UN_LOGINED' // 的确没有登录
 }
 export interface MineState {
-  loginState:LOGIN_TYPES; // 登录状态
-  user: User | null; // 用户信息
+  loginState: LOGIN_TYPES; // 登录状态
+  user: any;//User | null; // 用户信息
   error: string | null
 }
 

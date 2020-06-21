@@ -13,6 +13,12 @@ export default {
       payload: validate()
     }
   },
+  setAvatar(avatarUrl:string){
+    return {
+      type: types.SET_AVATAR,
+      payload: avatarUrl
+    }
+  }
   // logout() {
   //   return function (dispatch: any) {
   //     sessionStorage.removeItem('access_token');

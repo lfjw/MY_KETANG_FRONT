@@ -1,5 +1,5 @@
 
-import { User } from "src/typings/state";
+import { User } from "src/typings";
 
 //注册接口返回的响应体类型
 export interface RegisterData {

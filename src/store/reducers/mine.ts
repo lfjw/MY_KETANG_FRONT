@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { MineState, LOGIN_TYPES } from '../../typings/state'
+import { MineState, LOGIN_TYPES } from '../../typings'
 import * as types from "../action-types";
 
 // 初始值
@@ -32,7 +32,15 @@ export default function (state: MineState = initialState, action: AnyAction): Mi
         user: null,
         error: null
       }
-
+    case types.SET_AVATAR:
+      
+      return {
+        ...state,
+        user :{
+          ...state.user,
+          avatar:action.payload
+        }
+      }
     default:
       break;
   }
