@@ -1,8 +1,9 @@
-import React, { PropsWithChildren, useRef } from 'react'
+import React, { useRef } from 'react'
 import './index.scss'
 import HomeHeader from './components/HomeHeader'
 import HomeSliders from "./components/HomeSliders";
-import { RouteComponentProps } from 'react-router-dom'
+import HomeLesson from "./components/HomeLesson";
+//import { RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { CombinedState, HomeState } from 'src/typings'
 import mapDispatchToProps from 'src/store/actions/home'
@@ -12,7 +13,9 @@ import mapDispatchToProps from 'src/store/actions/home'
  */
 // TODO 深入了解一下 typeof 泛型
 // PropsWithChildren 用到children要写
-type Props = PropsWithChildren<RouteComponentProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps>
+
+// TODO 类型注释掉了，记得查看原因
+type Props = any//PropsWithChildren<RouteComponentProps & ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps>
 // 等价于
 // type Prop = RouteComponentProps &  HomeState
 
@@ -21,7 +24,7 @@ function Home(props: Props) {
   let homeContainer = useRef<HTMLDivElement>(null) // {current:null } => {current:HTMLDivElement}
 
   console.log(props);
-  
+
   return (
     <>
       <HomeHeader
@@ -34,6 +37,9 @@ function Home(props: Props) {
           sliders={props.sliders}
           getSliders={props.getSliderList}
         />
+
+        <HomeLesson getLessons={props.getLessons}
+        lessons = {props.lessons} />
       </div>
     </>
   )

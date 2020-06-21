@@ -1,23 +1,25 @@
-import { combineReducers, ReducersMapObject, Reducer } from "redux";
+import { ReducersMapObject, Reducer } from "redux";
 import {
-  connectRouter,
-  LocationChangeAction,
+  connectRouter
 } from "connected-react-router";
 import home from "./home";
 import mine from "./mine";
 import profile from "./profile";
-import history from "../../history";
-import { CombinedState } from '../../typings'
+import history from "src/history";
+import { CombinedState } from 'src/typings'
 
-let reducers: ReducersMapObject<CombinedState, LocationChangeAction> = {
+import produce from 'immer'
+// combineReducers之前是从redux 引入
+import { combineReducers } from 'redux-immer'
+
+
+let reducers: ReducersMapObject<CombinedState, any> = {
   home,
   mine,
   profile,
   router: connectRouter(history),
 };
 
-const rootReducer: Reducer<CombinedState, LocationChangeAction> = combineReducers<
-  CombinedState
->(reducers);
+const rootReducer: Reducer<CombinedState, any> = combineReducers(produce, reducers);
 
 export default rootReducer;

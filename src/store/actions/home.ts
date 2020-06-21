@@ -1,5 +1,7 @@
 import * as types from '../action-types'
-import { sliderList } from 'src/api/home'
+import { sliderList, getLessons } from 'src/api/home'
+import { StoreDispatch, StoreGetState } from 'src/store'
+import { LessonData } from 'src/typings'
 export default {
   // 设置分类
   setCurrentCategory(currentCategory: string) {
@@ -14,8 +16,33 @@ export default {
     // 中间件redux-promise会等待promise完成，完成之后，会再次派发action  dispatch({type:GET_SLIDERS, payload:SliderData}) SliderData返回结果
     return {
       type: types.GET_SLIDERS,
-      payload: sliderList() 
+      payload: sliderList()
     }
-    
+  },
+  // 获取课程列表
+  getLessons() {
+    return function (dispatch: StoreDispatch, getState: StoreGetState) {
+      (async function () {
+        let { currentCategory, lessons: { hasMore, offset, limit, loading } } = getState().home
+
+        if (!loading && hasMore) {
+
+          dispatch({
+            type: types.SET_LESSONS_LOADING,
+            payload: true
+          }) // loading设置为true
+
+          let result: LessonData = await getLessons<LessonData>(currentCategory, offset, limit) // loading设置为true
+
+          // 调用接口加载数据
+          dispatch({
+            type: types.SET_LESSONS,
+            payload: result.data
+          })
+
+        }
+      })()
+    }
   }
+
 }
