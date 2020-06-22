@@ -7,24 +7,31 @@ type Props = PropsWithChildren<{
   sliders: Slider[],
   getSliders: () => void;
 }>
+
 function HomeSliders(props: Props) {
-  // TODO [prop]
+
+  const { getSliders, sliders } = props
+
   useEffect(() => {
-    if (props.sliders.length === 0) {
-      props.getSliders();
+    
+    if (sliders.length === 0) {
+      getSliders()
     }
-  }, [props])
+  }, [getSliders, sliders.length])
 
   return (
-    <Carousel>
-      {
-        props.sliders.map((item: Slider, index: number) => (
-          <div key={index} className='img'>
-            <img src={item.url} alt='图片'></img>
-          </div>
-        ))
-      }
-    </Carousel>
+    <>
+      {sliders.length !== 0 && <Carousel autoplay>
+        {
+          sliders.map((item: Slider, index: number) => (
+            <div key={index} className='img'>
+              <img src={item.url} alt='图片'></img>
+            </div>
+          ))
+        }
+      </Carousel>}
+    </>
+
   )
 }
 

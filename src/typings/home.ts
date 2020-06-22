@@ -1,5 +1,4 @@
-import { Slider,Lesson } from './index'
-
+import { Slider, Lesson } from './index'
 
 
 export interface Lessons {
@@ -8,8 +7,9 @@ export interface Lessons {
   hasMore: boolean;
   offset: number;
   limit: number
-
 }
+
+
 export interface HomeState {
   currentCategory: string;
   sliders: Slider[];

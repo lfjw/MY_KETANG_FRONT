@@ -7,6 +7,7 @@ import HomeLesson from "./components/HomeLesson";
 import { connect } from 'react-redux'
 import { CombinedState, HomeState } from 'src/typings'
 import mapDispatchToProps from 'src/store/actions/home'
+
 /**
  * 因为此组件是由路由渲染出来的
  * 所以属性对象会包含路由属性
@@ -22,24 +23,21 @@ type Props = any//PropsWithChildren<RouteComponentProps & ReturnType<typeof mapS
 function Home(props: Props) {
   // 刚开始是null ，渲染之后，会把div真实的dom元素赋值给current
   let homeContainer = useRef<HTMLDivElement>(null) // {current:null } => {current:HTMLDivElement}
-
-  console.log(props);
-
   return (
     <>
       <HomeHeader
         currentCategory={props.currentCategory}
         setCurrentCategory={props.setCurrentCategory}
       />
-
       <div className='home-container' ref={homeContainer}>
         <HomeSliders
           sliders={props.sliders}
           getSliders={props.getSliderList}
         />
-
-        <HomeLesson getLessons={props.getLessons}
-        lessons = {props.lessons} />
+        <HomeLesson
+          getLessons={props.getLessons}
+          lessons={props.lessons}
+        />
       </div>
     </>
   )
@@ -48,4 +46,3 @@ function Home(props: Props) {
 const mapStateToProps = (state: CombinedState): HomeState => state.home
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
-// connect(state=> state, action)

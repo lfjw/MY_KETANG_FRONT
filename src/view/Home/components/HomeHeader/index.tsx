@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties, useEffect } from "react";
+import React, { useState, CSSProperties } from "react";
 import "./index.scss";
 import { MenuFoldOutlined } from "@ant-design/icons";
 
@@ -13,10 +13,10 @@ import { Transition } from "react-transition-group";
  *
  *
  * import logo from 'logo.png' ts会有问题
- * 
+ *
  * ts不认识图片 只认识js jsx tsx 不能加载
  * 想要import 需要加文件
- * images.d.ts 
+ * images.d.ts
  * declare module '*.svg'
  * declare module '*.png'
  * declare module '*.jpg'
@@ -38,7 +38,7 @@ const duration = 300;
 const defaultStyle: CSSProperties = {
   transition: `opacity ${duration}ms ease-in-out`,
   opacity: 0,
-}
+};
 
 interface TransitionStyles {
   entering: CSSProperties;
@@ -52,7 +52,7 @@ const transitionStyles: TransitionStyles = {
   entered: { opacity: 1 },
   exiting: { opacity: 0 },
   exited: { opacity: 0 },
-  unmounted: { opacity: 0 }
+  unmounted: { opacity: 0 },
 };
 
 interface Props {
@@ -67,16 +67,6 @@ function HomeHeader(props: Props) {
     props.setCurrentCategory(category);
     setIsMenuVisible(false);
   };
-
-
-  useEffect(() => {
-    console.log('订阅');
-    return () => {
-      console.log('取消订阅');
-
-    }
-
-  })
   return (
     <header className="home-header">
       <div className="logo-header">
@@ -94,7 +84,7 @@ function HomeHeader(props: Props) {
             onClick={setCurrentCategory}
             style={{
               ...defaultStyle,
-              ...transitionStyles[state]
+              ...transitionStyles[state],
             }}
           >
             <li

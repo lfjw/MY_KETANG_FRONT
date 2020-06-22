@@ -34,6 +34,7 @@ function Mine(props: Props) {
   // TODO []概念 props 会导致死循环，深入了解一下
   useEffect(() => {
     validate()
+    
   }, [validate])
 
   const [loading, changeLoading] = useState(false)

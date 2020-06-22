@@ -1,24 +1,23 @@
 import React, { PropsWithChildren, useEffect } from 'react'
 import './index.scss'
-import { Lessons } from 'src/typings'
-
+import { Lesson } from "src/typings";
 
 type Props = PropsWithChildren<{
-  lessons: Lessons[],
+  lessons: any;//Lessons[],
   getLessons: () => void
 }>
+
 function HomeLesson(props: Props) {
-  console.log(props);
+  const { getLessons, lessons } = props
   
   useEffect(() => {
-    const { getLessons} = props
     getLessons()
-    console.log(11);
-    
-  }, [props])
+  }, [getLessons])
   return (
     <>
-      
+      {lessons.list.map((res: Lesson, index: number) => (
+        <div key={index}>{res.poster}</div>
+      ))}
     </>
   )
 }
