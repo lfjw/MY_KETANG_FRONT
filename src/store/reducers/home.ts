@@ -35,6 +35,7 @@ export default function (
     case types.SET_LESSONS_LOADING:
       state.lessons.loading = action.payload
       return state
+    // 上拉加载
     case types.SET_LESSONS:
       state.lessons.loading = false;
       state.lessons.list = [...state.lessons.list, ...action.payload.list]
@@ -42,20 +43,27 @@ export default function (
       state.lessons.offset = state.lessons.offset + action.payload.list.length
       return state
 
-      // reducer 规定不要改对象，永远都会返回一个新对象
-      // scu优化
-      // immer 优化
-      // return {
-      //   ...state, // 老状态
-      //   lessons: {
-      //     ...state.lessons,
-      //     loading: false,
-      //     list: [...state.lessons.list, ...action.payload.list],
-      //     hasMore: action.payload.hasMore,
-      //     offset: state.lessons.offset + action.payload.list.length,
-      //   }
-      // };
+    // reducer 规定不要改对象，永远都会返回一个新对象
+    // scu优化
+    // immer 优化
+    // return {
+    //   ...state, // 老状态
+    //   lessons: {
+    //     ...state.lessons,
+    //     loading: false,
+    //     list: [...state.lessons.list, ...action.payload.list],
+    //     hasMore: action.payload.hasMore,
+    //     offset: state.lessons.offset + action.payload.list.length,
+    //   }
+    // }; 
 
+    // 下拉刷新
+    case types.REFRESH_LESSONS:
+      state.lessons.loading = false;
+      state.lessons.list = action.payload.list
+      state.lessons.hasMore = action.payload.hasMore
+      state.lessons.offset = action.payload.list.length
+      return state
     default:
       break;
   }

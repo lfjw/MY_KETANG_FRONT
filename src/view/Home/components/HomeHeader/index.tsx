@@ -58,6 +58,7 @@ const transitionStyles: TransitionStyles = {
 interface Props {
   currentCategory: string; //当前选中的分类 此数据会放在redux仓库中
   setCurrentCategory: (currentCategory: string) => any; // 改变仓库中的分类
+  refreshLessons:Function;
 }
 function HomeHeader(props: Props) {
   let [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -65,6 +66,7 @@ function HomeHeader(props: Props) {
     let target: HTMLUListElement = event.target as HTMLUListElement;
     let category: any = target.dataset.category;
     props.setCurrentCategory(category);
+    props.refreshLessons()
     setIsMenuVisible(false);
   };
   return (

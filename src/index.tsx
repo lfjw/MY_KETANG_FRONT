@@ -11,7 +11,7 @@ import Mine from './view/Mine'
 import Profile from './view/Profile'
 import Login from './view/Login'
 import Register from './view/Register'
-
+import Detail from "src/view/Detail";
 
 import { ConnectedRouter } from 'connected-react-router'
 import history from './history'
@@ -28,6 +28,7 @@ ReactDOM.render(
             <Route path='/Profile' exact component={Profile}></Route>
             <Route path='/Login' exact component={Login}></Route>
             <Route path='/Register' exact component={Register}></Route>
+            <Route path='/detail/:id' exact component={Detail}></Route>
           </Switch>
         </main>
         <Tab></Tab>

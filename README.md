@@ -43,3 +43,9 @@ cnpm i React-Motion -S
 
 使用组件库
 https://ant.design/
+
+
+
+## 4. 优化
+
+- 只渲染可是区域的卡片，为了滚动条正常，放一张空的div

@@ -53,6 +53,32 @@ export default {
         }
       })()
     }
-  }
+  },
 
+
+  // 更新课程
+  refreshLessons() {
+    return function (dispatch: StoreDispatch, getState: StoreGetState) {
+      (async function () {
+        let { currentCategory, lessons: { limit, loading } } = getState().home
+
+        if (!loading ) {
+
+          dispatch({
+            type: types.SET_LESSONS_LOADING,
+            payload: true
+          }) // loading设置为true
+          // 从头开始加载
+          let result: LessonData = await getLessons<LessonData>(currentCategory, 0, limit) // loading设置为true
+
+          // 调用接口加载数据
+          dispatch({
+            type: types.REFRESH_LESSONS,
+            payload: result.data
+          })
+
+        }
+      })()
+    }
+  }
 }

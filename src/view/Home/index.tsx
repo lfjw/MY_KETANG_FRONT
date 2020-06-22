@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import './index.scss'
 import HomeHeader from './components/HomeHeader'
 import HomeSliders from "./components/HomeSliders";
@@ -7,6 +7,7 @@ import HomeLesson from "./components/HomeLesson";
 import { connect } from 'react-redux'
 import { CombinedState, HomeState } from 'src/typings'
 import mapDispatchToProps from 'src/store/actions/home'
+import { loadMore, downRefresh } from 'src/utils'
 
 /**
  * 因为此组件是由路由渲染出来的
@@ -20,12 +21,21 @@ type Props = any//PropsWithChildren<RouteComponentProps & ReturnType<typeof mapS
 // 等价于
 // type Prop = RouteComponentProps &  HomeState
 
+
+
+
 function Home(props: Props) {
   // 刚开始是null ，渲染之后，会把div真实的dom元素赋值给current
-  let homeContainer = useRef<HTMLDivElement>(null) // {current:null } => {current:HTMLDivElement}
+  let homeContainer = useRef<any>(null) // {current:null } => {current:HTMLDivElement}
+  const { getLessons, refreshLessons } = props
+  useEffect(() => {
+    loadMore(homeContainer.current, getLessons)
+    downRefresh(homeContainer.current, refreshLessons)
+  }, [getLessons, refreshLessons])
   return (
     <>
       <HomeHeader
+        refreshLessons={refreshLessons}
         currentCategory={props.currentCategory}
         setCurrentCategory={props.setCurrentCategory}
       />
