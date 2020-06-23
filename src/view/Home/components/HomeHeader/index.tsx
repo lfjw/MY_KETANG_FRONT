@@ -48,11 +48,11 @@ interface TransitionStyles {
   unmounted: CSSProperties;
 }
 const transitionStyles: TransitionStyles = {
-  entering: { opacity: 1 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-  exited: { opacity: 0 },
-  unmounted: { opacity: 0 },
+  entering: { opacity: 1, display:'block' },
+  entered: { opacity: 1, display: 'block' },
+  exiting: { opacity: 0, display: 'none' },
+  exited: { opacity: 0, display: 'none' },
+  unmounted: { opacity: 0, display: 'none'},
 };
 
 interface Props {

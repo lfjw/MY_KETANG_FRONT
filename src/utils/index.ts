@@ -52,15 +52,13 @@ export function downRefresh(element: HTMLDivElement, callback: Function) {
 
     // 当此元素处于原始位置才能下拉，回弹的过程不能下拉，并且向上滚动的高度为0
     if (element.offsetTop === originalTop && element.scrollTop === 0) {
-      startY = event.touches[0].pageX // 记录当前点击的纵坐标
+      startY = event.touches[0].pageY // 记录当前点击的纵坐标
       element.addEventListener('touchmove', _touchMove)
       element.addEventListener('touchend', _touchEnd)
     }
 
-    function _touchMove(event: TouchEvent) {
-      let pageY = event.touches[0].pageY // 拿到最新的纵坐标
-      console.log(pageY, 'pageY', startY, 'startY');
-
+    function _touchMove(ev: TouchEvent) {
+      let pageY = ev.touches[0].pageY // 拿到最新的纵坐标
       if (pageY > startY) {
         distance = pageY - startY
         element.style.top = originalTop + distance + 'px'

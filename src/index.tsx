@@ -12,6 +12,7 @@ import Profile from './view/Profile'
 import Login from './view/Login'
 import Register from './view/Register'
 import Detail from "src/view/Detail";
+import Cart from "src/view/Cart";
 
 import { ConnectedRouter } from 'connected-react-router'
 import history from './history'
@@ -29,6 +30,7 @@ ReactDOM.render(
             <Route path='/Login' exact component={Login}></Route>
             <Route path='/Register' exact component={Register}></Route>
             <Route path='/detail/:id' exact component={Detail}></Route>
+            <Route path='/cart' exact component={Cart}></Route>
           </Switch>
         </main>
         <Tab></Tab>

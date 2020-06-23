@@ -27,6 +27,7 @@ type Props = any//PropsWithChildren<RouteComponentProps & ReturnType<typeof mapS
 function Home(props: Props) {
   // 刚开始是null ，渲染之后，会把div真实的dom元素赋值给current
   let homeContainer = useRef<any>(null) // {current:null } => {current:HTMLDivElement}
+
   const { getLessons, refreshLessons } = props
   useEffect(() => {
     loadMore(homeContainer.current, getLessons)
