@@ -5,6 +5,7 @@ import {
 import home from "./home";
 import mine from "./mine";
 import profile from "./profile";
+import cart from "./cart";
 import history from "src/history";
 import { CombinedState } from 'src/typings'
 
@@ -17,6 +18,7 @@ let reducers: ReducersMapObject<CombinedState, any> = {
   home,
   mine,
   profile,
+  cart,
   router: connectRouter(history),
 };
 

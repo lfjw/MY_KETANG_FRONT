@@ -6,7 +6,7 @@ import { AnyAction } from 'redux'
 
 let initialState: CartState = []
 
-export default function (state: CartState = initialState, action: AnyAction): CartState {
+export default function (state: CartState = initialState, action: AnyAction): any {
   switch (action.type) {
     // 向购物车里添加一个条目，如果有商品数量加1，没有则加一个条目
     case types.ADD_CART_ITEM:
@@ -39,21 +39,18 @@ export default function (state: CartState = initialState, action: AnyAction): Ca
     // 选中的条目
     case types.CHANGE_CHECKED_CART_ITEMS:
       let checkedIds = action.payload;
-      state.map((item: CartItem) => {
+      return state.map((item: CartItem) => {
         // 选中
         if (checkedIds.includes(item.lesson.id)) {
           item.checked = true
         } else {
           item.checked = false;
         }
+        return item
       })
-      // TODO 此处不一致
-      return state
-
     // 结算
     case types.SETTLE:
-      state.filter((item: CartItem) => !item.checked)
-      return state
+      return state.filter((item: CartItem) => !item.checked)
     default:
       break;
   }

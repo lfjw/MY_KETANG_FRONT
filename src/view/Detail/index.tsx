@@ -6,7 +6,7 @@ import { Card, Button } from 'antd';
 
 import { connect } from "react-redux";
 
-import actions from "src/store/actions/home";
+import actions from "src/store/actions/cart";
 import { RouteComponentProps } from 'react-router-dom';
 import { StaticContext } from "react-router";
 
@@ -14,8 +14,14 @@ interface Params {
   id: string;
 }
 
-type Props = PropsWithChildren<RouteComponentProps<Params, StaticContext, Lesson>>;
-function Detail(props: Props) {
+
+// TODO 添加& typeof actions 拿到cart actions的方法
+type Props = PropsWithChildren<
+  RouteComponentProps<Params, StaticContext, Lesson> & typeof actions
+>;
+
+
+function Detail(props: any) {
 
   const [lesson] = useState<Lesson>(props.location.state)
   useEffect(() => {
@@ -26,7 +32,8 @@ function Detail(props: Props) {
 
   const addCart = (lesson: Lesson) => {
     console.log(lesson);
-    
+    props.addCartItem(lesson)
+
   }
   return (
     <>
@@ -34,7 +41,7 @@ function Detail(props: Props) {
       <Card hoverable style={{ width: '100%' }} cover={<img src={lesson.poster} alt='图片'></img>}>
         <Card.Meta title={lesson.title} description={
           <>
-          
+
             <p>{`价格${lesson.price}元`}</p>
             <p>
               <Button className='add=cart' onClick={() => addCart(lesson)}>添加购物车</Button>

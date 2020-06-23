@@ -1,7 +1,7 @@
 import {
   RouterState,
 } from "connected-react-router";
-import { HomeState} from './'
+import { HomeState, CartState} from './'
 
 export interface User {
   id?: string; //用户id
@@ -30,4 +30,5 @@ export interface CombinedState {
   mine: MineState;
   profile: ProfileState;
   router: RouterState;
+  cart: CartState;
 }
