@@ -18,7 +18,7 @@ function HomeLesson(props: Props) {
   return (
     <>
       {lessons.list.map((item: Lesson, index: number) => (
-       
+
         <Link key={index} to={{ pathname: `/detail/${item.id}`, state: item }}>
           <Card
             key={index}
@@ -26,14 +26,12 @@ function HomeLesson(props: Props) {
             style={{ width: '100%' }}
             cover={<img src={item.poster} alt='图片' />}
           >
-
             <Card.Meta title={item.title} description={`价格¥${item.price}元${item.id}`}></Card.Meta>
           </Card>
         </Link>
 
       ))}
       {/* 加载下一页 */}
-
 
       {
         lessons.hasMore ? <Button onClick={getLessons} type='primary' block loading={lessons.loading}>{lessons.loading ? '' : '加载更多'}</Button> :

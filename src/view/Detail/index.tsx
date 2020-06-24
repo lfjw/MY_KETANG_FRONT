@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, PropsWithChildren } from 'react'
 import './index.scss'
 import { Lesson, CombinedState } from 'src/typings';
 import Nav from 'src/components/Nav';
@@ -7,28 +7,27 @@ import { Card, Button } from 'antd';
 import { connect } from "react-redux";
 
 import mapDispatchToProps from "src/store/actions/cart";
+import { RouteComponentProps, StaticContext } from "react-router";
 
 interface Params {
   id: string;
 }
 
 // 添加& typeof actions 拿到cart actions的方法
-// type Props = PropsWithChildren<
-//   RouteComponentProps<Params, StaticContext, Lesson> & typeof actions
-// >;
+type Props = PropsWithChildren<
+  RouteComponentProps<Params, StaticContext, Lesson> & typeof mapDispatchToProps
+>;
 
 // TODO props不应该为any
 function Detail(props: any) {
-
+  
   const [lesson] = useState<Lesson>(props.location.state)
   useEffect(() => {
 
   }, [])
 
   const addCart = (lesson: Lesson) => {
-    console.log(lesson);
     props.addCartItem(lesson)
-
   }
   return (
     <>
