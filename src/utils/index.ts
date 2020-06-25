@@ -35,10 +35,12 @@ export function downRefresh(element: HTMLDivElement, callback: Function) {
   let startY: number; //刚按下的时候，初始坐标
   let distance: number; //下拉的距离
   let originTop = element.offsetTop; // 最初的距离父级顶部的距离
-
   // 按下
   element.addEventListener('touchstart', function (event: TouchEvent) {
 
+
+    console.log(element.scrollTop,'----element.scrollTop---element.scrollTop');
+    
     // 回弹过程中在拉不生效
     if (element.offsetTop !== originTop) return
 
@@ -74,11 +76,14 @@ export function downRefresh(element: HTMLDivElement, callback: Function) {
           element.style.top = originTop + (--distance) + 'px'
         }
       }, 13);
+      console.log(timer);
+      
 
       // element.style.transition = 'all 1s ease-in';
       // element.style.top = originTop + 'px'
 
       // 当下拉距离大于30px，就执行函数
+      
       if (distance > 30) {
         callback()
       }

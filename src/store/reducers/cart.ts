@@ -10,11 +10,12 @@ export default function (state: CartState = initialState, action: AnyAction): an
   switch (action.type) {
     // 向购物车里添加一个条目，如果有商品数量加1，没有则加一个条目
     case types.ADD_CART_ITEM:
+
       let oldLesson = state.find(item => item.lesson.id === action.payload.id)
       if (oldLesson) {
         oldLesson.count += 1
       } else {
-        state.push(action.payload)
+        state.push({ count: 1, checked: false, lesson: action.payload })
       }
       return state
     // 删除一个
@@ -36,6 +37,7 @@ export default function (state: CartState = initialState, action: AnyAction): an
         changeLesson.count = action.payload.count;
       }
       return state
+
     // 选中的条目
     case types.CHANGE_CHECKED_CART_ITEMS:
       let checkedIds = action.payload;
@@ -54,5 +56,5 @@ export default function (state: CartState = initialState, action: AnyAction): an
     default:
       break;
   }
-
+  return state
 }
